@@ -1,0 +1,7 @@
+# 快速打包：先在本机 mvn package，再 docker build -f deploy/docker/Dockerfile.quick -t carpool/trip-service:latest .
+ARG MODULE=trip-service
+FROM eclipse-temurin:21-jre-alpine
+ARG MODULE
+WORKDIR /app
+COPY ${MODULE}/target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]

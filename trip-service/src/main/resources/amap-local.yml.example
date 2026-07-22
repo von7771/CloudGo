@@ -1,0 +1,4 @@
+# 复制本文件为 amap-local.yml 并填入你的 Key（amap-local.yml 已被 .gitignore 忽略）
+amap:
+  api-key: 你的高德Web服务Key
+  city: 北京

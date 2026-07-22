@@ -1,0 +1,65 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: trip-service
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        group: DEFAULT_GROUP
+        file-extension: yml
+        refresh-enabled: false
+    sentinel:
+      eager: true
+      transport:
+        dashboard: localhost:8088
+        port: 8719
+      datasource:
+        flow:
+          file:
+            file: classpath:sentinel/flow-rules.json
+            data-type: json
+            rule-type: flow
+        degrade:
+          file:
+            file: classpath:sentinel/degrade-rules.json
+            data-type: json
+            rule-type: degrade
+  config:
+    import:
+      - nacos:trip-service.yml
+      - optional:classpath:amap-local.yml
+      - optional:classpath:openweather-local.yml
+
+feign:
+  sentinel:
+    enabled: true
+
+seata:
+  enabled: true
+  tx-service-group: my_test_tx_group
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      cluster: default
+  config:
+    type: file
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.alibaba.nacos.client.config.impl.ClientWorker: WARN

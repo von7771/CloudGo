@@ -1,0 +1,47 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^AiAssistantFab$": "@/components/AiAssistantFab.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/login/login",
+      "style": { "navigationBarTitleText": "乘客登录", "navigationStyle": "custom" }
+    },
+    {
+      "path": "pages/register/register",
+      "style": { "navigationBarTitleText": "乘客注册", "navigationStyle": "custom" }
+    },
+    {
+      "path": "pages/home/home",
+      "style": { "navigationBarTitleText": "叫车", "navigationStyle": "custom" }
+    },
+    {
+      "path": "pages/trips/trips",
+      "style": {
+        "navigationBarTitleText": "我的行程",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/trip/detail",
+      "style": { "navigationBarTitleText": "行程详情" }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": { "navigationBarTitleText": "我的" }
+    },
+    {
+      "path": "pages/assistant/assistant",
+      "style": { "navigationBarTitleText": "AI助手", "navigationStyle": "custom" }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "拼车乘客",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f5f7fa"
+  }
+}

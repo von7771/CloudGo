@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拼车乘客发单 (P6 H5)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 520px; margin: 24px auto; padding: 0 16px; }
+    label { display: block; margin-top: 12px; font-weight: 600; }
+    input, button { width: 100%; padding: 10px; margin-top: 6px; box-sizing: border-box; }
+    button { background: #1677ff; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    pre { background: #f5f5f5; padding: 12px; overflow: auto; font-size: 13px; }
+    .hint { color: #666; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>乘客发单</h1>
+  <p class="hint">Gateway 默认 <code>http://localhost:8080</code>，先登录再发单。</p>
+
+  <label>Gateway 地址</label>
+  <input id="baseUrl" value="http://127.0.0.1:30080" />
+
+  <label>用户名</label>
+  <input id="username" value="passenger1" />
+
+  <label>密码</label>
+  <input id="password" type="password" value="123456" />
+
+  <button onclick="login()">登录</button>
+
+  <label>起点</label>
+  <input id="startPoint" value="广州大学城" />
+
+  <label>终点</label>
+  <input id="endPoint" value="广州南站" />
+
+  <button onclick="createTrip()">发单</button>
+
+  <h3>结果</h3>
+  <pre id="output">等待操作...</pre>
+
+  <script>
+    let token = '';
+
+    async function login() {
+      const base = document.getElementById('baseUrl').value.replace(/\/$/, '');
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const url = `${base}/api/passenger/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+      const res = await fetch(url, { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+      token = data.data?.token || data.token || '';
+    }
+
+    async function createTrip() {
+      if (!token) {
+        alert('请先登录');
+        return;
+      }
+      const base = document.getElementById('baseUrl').value.replace(/\/$/, '');
+      const startPoint = document.getElementById('startPoint').value;
+      const endPoint = document.getElementById('endPoint').value;
+      const url = `${base}/api/passenger/trips?startPoint=${encodeURIComponent(startPoint)}&endPoint=${encodeURIComponent(endPoint)}`;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^AiAssistantFab$": "@/components/AiAssistantFab.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/workbench/workbench",
+      "style": {
+        "navigationBarTitleText": "司机工作台",
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": { "navigationBarTitleText": "我的" }
+    },
+    {
+      "path": "pages/login/login",
+      "style": { "navigationBarTitleText": "司机登录", "navigationStyle": "custom" }
+    },
+    {
+      "path": "pages/register/register",
+      "style": { "navigationBarTitleText": "司机注册", "navigationStyle": "custom" }
+    },
+    {
+      "path": "pages/assistant/assistant",
+      "style": { "navigationBarTitleText": "AI助手", "navigationStyle": "custom" }
+    }
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#52c41a",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/workbench/workbench",
+        "text": "工作台"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "拼车司机",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f5f7fa"
+  }
+}

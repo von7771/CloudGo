@@ -1,0 +1,8 @@
+app:
+  llm:
+    base-url: https://api.deepseek.com
+    model: deepseek-chat
+    api-key: ${DEEPSEEK_API_KEY:}
+    max-tokens: 512
+    temperature: 0.3
+    max-tool-rounds: 2

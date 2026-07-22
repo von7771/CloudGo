@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/carpool_trip_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: ${MYSQL_ROOT_PASSWORD:CHANGE_ME_MYSQL_ROOT_PASSWORD}
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+
+amap:
+  api-key: ${AMAP_API_KEY:}
+  city: 广州
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:CHANGE_ME_JWT_SECRET}
+    expire-ms: 86400000
+  kafka:
+    enabled: false

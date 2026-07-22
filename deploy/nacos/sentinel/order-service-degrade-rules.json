@@ -1,0 +1,10 @@
+[
+  {
+    "resource": "GET:http://user-service/api/user/credit",
+    "grade": 1,
+    "count": 0.6,
+    "timeWindow": 10,
+    "minRequestAmount": 5,
+    "statIntervalMs": 1000
+  }
+]

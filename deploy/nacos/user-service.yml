@@ -1,0 +1,8 @@
+# Nacos Data ID: user-service.yml  Group: DEFAULT_GROUP
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/carpool_user_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: ${MYSQL_ROOT_PASSWORD:CHANGE_ME_MYSQL_ROOT_PASSWORD}

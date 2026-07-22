@@ -1,0 +1,22 @@
+# 带 SkyWalking Java Agent 的镜像（需先 mvn package）
+# Agent 从官方 Docker 镜像 COPY，避免 build 时 curl Apache 极慢
+# docker build -t carpool/trip-service:latest -f deploy/docker/Dockerfile.skywalking --build-arg MODULE=trip-service .
+ARG MODULE=trip-service
+ARG SW_AGENT_IMAGE=apache/skywalking-java-agent:9.6.0-java21
+
+FROM ${SW_AGENT_IMAGE} AS sw-agent
+
+FROM eclipse-temurin:21-jre-alpine
+ARG MODULE
+
+COPY --from=sw-agent /skywalking/agent /opt/skywalking/agent
+
+WORKDIR /app
+COPY ${MODULE}/target/*.jar app.jar
+COPY deploy/docker/entrypoint-skywalking.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENV SW_AGENT_COLLECTOR_BACKEND_SERVICES=skywalking-oap:11800
+ENV SW_AGENT_ENABLED=true
+
+ENTRYPOINT ["/entrypoint.sh"]

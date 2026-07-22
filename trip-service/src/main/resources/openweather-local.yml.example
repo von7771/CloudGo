@@ -1,0 +1,4 @@
+# 复制为 openweather-local.yml（勿提交 Git）
+openweather:
+  enabled: true
+  api-key: CHANGE_ME_OPENWEATHER_API_KEY
